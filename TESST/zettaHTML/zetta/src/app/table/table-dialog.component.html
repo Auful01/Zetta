@@ -1,0 +1,80 @@
+<div>
+  <div mat-dialog-title>
+    <mat-icon>person</mat-icon> Add company staff
+  </div>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <!-- <mat-label>Animal</mat-label> -->
+      <input matInput placeholder="Mail" [(ngModel)]="data.email" required>
+    </mat-form-field>&nbsp;
+  </div>
+
+  <div mat-dialog-content>
+    <mat-label aria-required="true">Civility</mat-label>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="data.civility">
+      <mat-radio-button value="mr">Mr</mat-radio-button>&nbsp;
+      <mat-radio-button value="mrs">Mrs</mat-radio-button>
+    </mat-radio-group>
+
+
+    <mat-form-field appearance="fill">
+      <!-- <mat-label>Animal</mat-label> -->
+      <input matInput placeholder="First name" [(ngModel)]="data.first_name" required>
+    </mat-form-field>&nbsp;
+
+    <mat-form-field appearance="fill">
+      <!-- <mat-label>Animal</mat-label> -->
+      <input matInput placeholder="Last name" [(ngModel)]="data.last_name" required>
+    </mat-form-field>&nbsp;
+    <mat-form-field appearance="fill">
+      <!-- <mat-label>Animal</mat-label> -->
+      <input matInput placeholder="Position" [(ngModel)]="data.position" required>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Office Phone" [(ngModel)]="data.office_phone" required>
+    </mat-form-field>&nbsp;
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Direct Line" [(ngModel)]="data.direct_line" required>
+    </mat-form-field>&nbsp;
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Mobile Phone" [(ngModel)]="data.mobile_phone" required>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label aria-required="true">Select Entity</mat-label>
+      <mat-select [(ngModel)]="data.entity">
+        <mat-option *ngFor="let ent of listEntity" [value]="ent.viewValue">
+          {{ent.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>&nbsp;
+    <mat-form-field appearance="fill">
+      <mat-label aria-required="true">Select Company</mat-label>
+      <mat-select [(ngModel)]="data.company.name">
+        <mat-option *ngFor="let ent of listCompany" [value]="ent.viewValue">
+          {{ent.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>&nbsp;
+    <mat-form-field appearance="fill">
+      <mat-select [(ngModel)]="data.company.user_type">
+        <mat-option *ngFor="let ent of listUserType" [value]="ent.viewValue" aria-placeholder="test">
+          {{ent.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+
+  <div mat-dialog-actions>
+    <button mat-button color="primary" (click)="onNoClick()">No Thanks</button>
+    <button mat-button cdkFocusInitial (click)="save()">Ok</button>
+  </div>
+</div>

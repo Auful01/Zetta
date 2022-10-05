@@ -1,0 +1,103 @@
+<div class="container">
+
+  <div style="text-align: right;margin-bottom: 20px;">
+    <button mat-flat-button color="primary">
+      <mat-icon>refresh</mat-icon>Reset
+    </button>&nbsp;
+    <button mat-flat-button color="accent" (click)="openDialog()">
+      <mat-icon>add</mat-icon> Add company staff
+    </button>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name-filter">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilterName($event)" placeholder="Filter">
+        </mat-form-field>
+      </th>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="type-filter">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilterType($event)" placeholder="Filter">
+        </mat-form-field>
+      </th>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> User type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+    <ng-container matColumnDef="entity-filter">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field appearance="fill">
+          <mat-label>Favorite food</mat-label>
+          <mat-select (selectionChange)="applyFilterEntity($event.value)">
+            <mat-option *ngFor="let ent of listEntity" [value]="ent.viewValue">
+              {{ent.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </th>
+    </ng-container>
+    <ng-container matColumnDef="entity">
+      <th mat-header-cell *matHeaderCellDef> Entity </th>
+      <td mat-cell *matCellDef="let element"> {{element.entity}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status-filter">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field appearance="fill">
+          <mat-label>Favorite food</mat-label>
+          <mat-select (selectionChange)="applyFilterStatus($event.value)">
+            <mat-option *ngFor="let ent of listStatus" [value]="ent.value">
+              {{ent.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </th>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-mini-fab color="accent" *ngIf="element.status == 'pending'">
+          <mat-icon>refresh</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" *ngIf="element.status == 'active'">
+          <mat-icon>check</mat-icon>
+        </button>&nbsp;
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-mini-fab color="warn">
+          <mat-icon>edit</mat-icon>
+        </button>&nbsp;
+        <button mat-mini-fab color="primary">
+          <mat-icon>mail</mat-icon>
+        </button>&nbsp;
+        <button mat-mini-fab color="accent" (click)="delete(element.id)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns">
+    </tr>
+    <tr mat-header-row *matHeaderRowDef="displayedFilter">
+    </tr>
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+
+    </tr>
+
+  </table>
+
+</div>
